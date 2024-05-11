@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#PBS -N MSRdepletion
+
+#PBS -P edu_res 
+
+#PBS -l select=2:ncpus=48:mpiprocs=12
+
+#PBS -l walltime=48:00:00 
+
+#PBS -q router 
+
+#PBS -j oe 
+
+#PBS -o inlOutput.out 
+
+#PBS -m abe
+
+#PBS -M kkelly@gatech.edu 
+
+cat $PBS_NODEFILE​
+
+cd $PBS_O_WORKDIR​
+
+export TMPDIR=/temp
+
+echo $TMPDIR
+
+echo $OMP_NUM_THREADS
+
+export TMPDIR=/tmp
+
+module load use.exp_ctl scale/6.2.4-gcc-8.4.0-mvapich2-2.3.3
+
+scalerte MSRdepletionFinal.inp -N 24 -M $PBS_NODEFILE -T temp -m

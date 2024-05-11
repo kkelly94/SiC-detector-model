@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#PBS -N MSRdepl
+
+#PBS -P edu_res 
+
+#PBS -l select=1:ncpus=40:mpiprocs=40
+
+#PBS -l walltime=40:00:00 
+
+#PBS -q router 
+
+#PBS -j oe 
+
+#PBS -o OutputLehmi.out 
+
+#PBS -m abe
+
+#PBS -M kkelly@gatech.edu 
+
+cat $PBS_NODEFILE
+
+cd $PBS_O_WORKDIR
+
+export OPENMC_CROSS_SECTIONS=/home/kellkevi/data/endfb71/endfb-vii.1-hdf5/cross_sections.xml
+
+module load py-openmc/0.13.2-gcc-11.2.0-45wl
+
+export OMP_NUM_THREADS=1
+
+python MSRstd.py > pythonLOG2

@@ -1,0 +1,104 @@
+=origen
+bounds {
+    neutron="K:\SCALE\SCALE-6.2.4\data\scale.rev04.xn252v7.1"
+    gamma=[ 99I 1.0e4 2.0e7]
+    }
+solver{ type=CRAM opt{ substeps=2 } }    
+case(RPV){
+    mat{ units=grams load {file="C:\Users\kevak\Cfdepletion.f71" pos=4} }
+    lib{file="C:\Users\kevak\mixtureThirteen.f33" pos=1}  
+    time { t=[ 0 1 6 11 21 50 100 500 800 1000 1600 2050] units=days }
+    flux=[ 1.2166e12 1.22e12 1.22e12 1.22e12 1.22e12 1.22e12 1.22e12 1.23e12 1.23e12 1.24e12 1.25e12 0]
+'    flux=[ 3590000000
+'3590094565
+'3590567390
+'3591040215
+'3591985865
+'3594728250
+'3599456500
+'3637282500
+'3665652000
+'3684565000
+'3741304000
+'0]    
+
+'flux=[4960000000000
+'4960076500000
+'4960459000000
+'4960841500000
+'4961606500000
+'4963825000000
+'4967650000000
+'4998250000000
+'5021200000000
+'5036500000000
+'5082400000000
+'0]
+  print {
+      neutron{
+          summary=yes
+          spectra=yes      
+      }
+
+      gamma{
+          summary=yes
+          spectra=yes
+          principal_step=LAST
+          principal_cutoff=5
+          unbinned_warning=yes
+      }
+
+      cutoffs=[ all=1.0E-14 ]
+      absfrac_sublib=ALL
+      absfrac_step=LAST
+      cutoff_step=AVERAGE
+      rel_cutoff=yes
+      fisrate=ABS
+      kinf=yes
+  }
+  neutron=yes
+  gamma=yes
+
+  save {
+      file="C:\Users\kevak\Downloads\Cfactivated.f71"
+      steps=ALL
+  }
+   
+}
+
+end
+
+
+'bounds {
+'    neutron="K:\SCALE\SCALE-6.2.4\data\scale.rev04.xn252v7.1"
+'    gamma=[ 99I 1.0e4 2.0e7]
+'    }
+'solver{ type=CRAM opt{ substeps=2 } }    
+'case(RPV){
+'    mat{ units=grams load {file="C:\Users\kevak\Downloads\ft71f001.f71" pos=14} }
+'    lib{file="C:\Users\kevak\Downloads\mixtureOne.f33" pos=14}  
+'    time { t=[ 0 1 6 11 21 50 100 500 800 1000 1600 2050] units=days }
+'
+'=opus
+'  title="RPV Layer 1"
+'  data="C:\Users\kevak\Downloads\RPV.f71"
+'  typarams=aspe
+'  time=days
+'  npos=1 end
+'end
+'
+'=opus
+'  title="RPV Layer 1, Gamma Spectrum"
+'  data="C:\Users\kevak\Downloads\RPV.f71"
+'  typarams=gspectrum
+'  time=days
+'end
+'
+'
+'=shell
+'mv _plot*0 C:\Users\kevak\Downloads\tytytyty.plt
+'end
+
+'units=grams load {file="C:\Users\kevak\Downloads\ft71f001.f71" pos=15
+'  lib {file="C:\Users\kevak\Downloads\mixtureEight.f33" pos=15}
+'  mat { units=grams load {file="C:\Users\kevak\Downloads\ft71f001.f71" pos=15} }
